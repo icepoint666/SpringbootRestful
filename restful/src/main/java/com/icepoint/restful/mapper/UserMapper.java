@@ -1,18 +1,12 @@
-package com.icepoint.restful.dao;
+package com.icepoint.restful.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
 
 import com.icepoint.restful.pojo.User;
-import org.springframework.stereotype.Component;
 
-@Mapper
-public interface UserDao {
+public interface UserMapper {
 
     @Insert("insert into t_user(id, name, age) values (#{id}, #{name}, #{age})")
     void addUser(User user);

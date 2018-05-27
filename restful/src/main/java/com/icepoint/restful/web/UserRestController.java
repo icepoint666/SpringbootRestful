@@ -2,6 +2,7 @@ package com.icepoint.restful.web;
 
 import java.util.List;
 
+import com.icepoint.restful.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,9 @@ import com.icepoint.restful.service.UserService;
 @RestController
 @RequestMapping(value = "/api")
 public class UserRestController {
+
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public boolean addUser(@RequestBody User user){

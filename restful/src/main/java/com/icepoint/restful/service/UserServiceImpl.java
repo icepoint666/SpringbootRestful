@@ -1,26 +1,24 @@
-package com.icepoint.restful.service.impl;
+package com.icepoint.restful.service;
 
 import java.util.List;
 
-import com.icepoint.restful.dao.UserDao;
+import com.icepoint.restful.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.icepoint.restful.pojo.User;
-import com.icepoint.restful.dao.UserDao;
-import com.icepoint.restful.service.UserService;
 
-@Service(value = "userService")
+@Service(value = "UserService")
 public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     @Override
     public boolean addUser(User user){
         boolean flag = false;
         try{
-            userDao.addUser(user);
+            userMapper.addUser(user);
             flag = true;
         }catch(Exception e){
             System.out.println("Add Failed!");
@@ -33,7 +31,7 @@ public class UserServiceImpl implements UserService{
     public boolean updateUser(User user){
         boolean flag = false;
         try{
-            userDao.updateUser(user);
+            userMapper.updateUser(user);
             flag = true;
         }catch(Exception e){
             System.out.println("Update Failed!");
@@ -46,7 +44,7 @@ public class UserServiceImpl implements UserService{
     public boolean deleteUser(int id){
         boolean flag = false;
         try{
-            userDao.deleteUser(id);
+            userMapper.deleteUser(id);
             flag = true;
         }catch(Exception e){
             System.out.println("Delete Failed!");
@@ -57,11 +55,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findUserByName(String userName){
-        return userDao.findByName(userName);
+        return userMapper.findByName(userName);
     }
 
     @Override
     public List<User> findAll(){
-        return userDao.findAll();
+        return userMapper.findAll();
     }
 }

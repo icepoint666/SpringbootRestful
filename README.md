@@ -12,7 +12,7 @@ iBatis(MyBatis) 是支持普通 SQL查询，[存储过程](https://baike.baidu.c
 
 iBatis架构：
 
-![f096b63f6246b602c18af9bebf81a4c500fa2c](image_folder/bf096b63f6246b602c18af9bebf81a4c500fa2ce.jpg)
+![f096b63f6246b602c18af9bebf81a4c500fa2c](pics/bf096b63f6246b602c18af9bebf81a4c500fa2ce.jpg)
 
 **iBatis工作原理**
 
@@ -25,7 +25,7 @@ iBATIS 通过 SQL Map 将 Java 对象映射成 SQL 语句和将结果集再转�
 
 iBATIS 的框架结构也是按照这种思想来组织类层次结构的，其实它是一种典型的交互式框架。先期准备好交互的必要条件，然后构建一个交互的环境，交互环境中还划分成会话，每次的会话也有一个环境。当这些环境都准备好了以后，剩下的就是交换数据了。其实涉及到网络通信，一般都会是类似的处理方式。
 
-![2120201_uAg](image_folder/02120201_uAgv.png)
+![2120201_uAg](pics/02120201_uAgv.png)
 
 上面的类图中左边 SqlMapClient 接口主要定义了客户端的操作行为包括 select、insert、update、delete。而右边主要是定义了当前客户端在当前线程的执行环境。SqlMapSession 可以共享使用，也可以自己创建，如果是自己创建在结束时必须要调用关闭接口关闭。
 
@@ -41,29 +41,29 @@ iBATIS 框架的一个重要组成部分就是其 SqlMap 配置文件，SqlMap �
 
 **statement**有关的类结构类：
 
-![2120201_w7W](image_folder/02120201_w7W3.png)
+![2120201_w7W](pics/02120201_w7W3.png)
 
 **参数映射** (SQL 语句中的参数与 Java 对象之间的关系)相关的类结构图：
 
-![2120202_3XI](image_folder/02120202_3XIU.png)
+![2120202_3XI](pics/02120202_3XIU.png)
 
 **iBATIS 框架的运行原理**
 
 主要执行步骤
 
-![2120202_k9w](image_folder/02120202_k9wa.gif)
+![2120202_k9w](pics/02120202_k9wa.gif)
 
 iBATIS 对管理事务既可以自己管理也可以由外部管理，iBATIS 自己管理是通过共享 SqlMapSession 对象实现的，多个 Statement 的执行时共享一个 SqlMapSession 实例，而且都是线程安全的。如果是外部程序管理就要自己控制 SqlMapSession 对象的生命周期。
 
 通过 Spring 调用 iBATIS 执行一个 Statement 的一个详细的时序图：
 
-![rigin_image00](image_folder/origin_image005.jpg)
+![rigin_image00](pics/origin_image005.jpg)
 
 ( [清晰版本](http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/origin_image005.jpg) )
 
 ##### 映射返回对象时序图
 
-![2120204_Uny](image_folder/02120204_UnyB.png)
+![2120204_Uny](pics/02120204_UnyB.png)
 
 
 
@@ -79,93 +79,114 @@ $ git clone https://github.com/icepoint666/SpringbootRestful.git
 
 **项目目录：**
 
-![标](image_folder/无标题.png)
+![标](pics/item.png)
 
-**项目构建：**通过maven配置pom.xml
+**项目构建：**
+
+通过maven配置pom.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-   <groupId>com.icepoint</groupId>
-   <artifactId>restful</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
-   <packaging>jar</packaging>
+	<groupId>com.icepoint</groupId>
+	<artifactId>restful</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-   <name>restful</name>
-   <description>Restful project for Spring Boot</description>
+	<name>restful</name>
+	<description>Restful project for Spring Boot</description>
 
-   <parent>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-parent</artifactId>
-      <version>2.0.1.RELEASE</version>
-      <relativePath/> <!-- lookup parent from repository -->
-   </parent>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
 
-   <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-      <java.version>1.8</java.version>
-   </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
 
-   <dependencies>
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
 
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-test</artifactId>
-         <scope>test</scope>
-      </dependency>
-      <!-- Spring Boot Mybatis 依赖 -->
-      <dependency>
-         <groupId>org.mybatis.spring.boot</groupId>
-         <artifactId>mybatis-spring-boot-starter</artifactId>
-      </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Spring Boot Mybatis 依赖 -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-configuration-processor</artifactId>
-         <optional>true</optional>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.apache.ibatis/ibatis-core -->
-      <dependency>
-         <groupId>org.apache.ibatis</groupId>
-         <artifactId>ibatis-core</artifactId>
-         <version>3.0</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-      <dependency>
-         <groupId>org.mybatis</groupId>
-         <artifactId>mybatis</artifactId>
-         <version>3.4.5</version>
-      </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.ibatis/ibatis-core -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+	</dependencies>
 
-      <dependency>
-         <groupId>mysql</groupId>
-         <artifactId>mysql-connector-java</artifactId>
-      </dependency>
-
-   </dependencies>
-
-   <build>
-      <plugins>
-         <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-         </plugin>
-      </plugins>
-   </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 
 </project>
+
 ```
 
+运行前先要在mysql，执行sql文件
 
+存放在resources/sql/sprintboot.sql
+
+```sql
+//springboot.sql
+CREATE DATABASE `springboot`;
+
+USE `springboot`;
+
+/*Table structure for table `t_user` */
+
+DROP TABLE IF EXISTS `t_user`;
+
+CREATE TABLE `t_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(10) DEFAULT NULL COMMENT '姓名',
+  `age` int(2) DEFAULT NULL COMMENT '年龄',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+```
+
+在mysql执行文件
+
+```shell
+$ mysql> source resources\sql\springboot.sql
+```
+
+![q](pics\sql.png)
+
+**项目代码：**
 
 **User.java**定义在pojo包里，表示Plain Ordinary Java Objects普通的Java对象
 
@@ -295,27 +316,27 @@ public interface UserService {
 
 ```java
 //UserServiceImpl.java
-package com.icepoint.restful.service.impl;
+package com.icepoint.restful.service;
 
 import java.util.List;
 
+import com.icepoint.restful.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.icepoint.restful.pojo.User;
-import com.icepoint.restful.dao.UserDao;
-import com.icepoint.restful.service.UserService;
 
-@Service
+@Service(value = "UserService")
 public class UserServiceImpl implements UserService{
+
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     @Override
     public boolean addUser(User user){
         boolean flag = false;
         try{
-            userDao.addUser(user);
+            userMapper.addUser(user);
             flag = true;
         }catch(Exception e){
             System.out.println("Add Failed!");
@@ -328,7 +349,7 @@ public class UserServiceImpl implements UserService{
     public boolean updateUser(User user){
         boolean flag = false;
         try{
-            userDao.updateUser(user);
+            userMapper.updateUser(user);
             flag = true;
         }catch(Exception e){
             System.out.println("Update Failed!");
@@ -341,7 +362,7 @@ public class UserServiceImpl implements UserService{
     public boolean deleteUser(int id){
         boolean flag = false;
         try{
-            userDao.deleteUser(id);
+            userMapper.deleteUser(id);
             flag = true;
         }catch(Exception e){
             System.out.println("Delete Failed!");
@@ -352,66 +373,36 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findUserByName(String userName){
-        return userDao.findByName(userName);
+        return userMapper.findByName(userName);
     }
 
     @Override
     public List<User> findAll(){
-        return userDao.findAll();
+        return userMapper.findAll();
     }
 }
 
 ```
 
-1）spring boot 中@Autowired注解无法自动注入的错误:
+PS: spring boot 中@Autowired注解无法自动注入的错误:
 
 原因：SpringBoot项目的Bean装配默认规则是根据Application类所在的包位置从上往下扫描！“Application类”是指SpringBoot项目入口类。这个类的位置很关键：如果Application类所在的包为：com.boot.app，则只会扫描com.boot.app包及其所有子包，如果service或dao所在包不在com.boot.app及其子包下，则不会被扫描！即把Application类放到dao、service所在包的上级，com.boot.Application知道这一点非常关键
 
-2）"Could not autowire. no beans of 'userdao' type found" Autowired装配错误提示：
-
-（报错，目前还在调试...)
-
-3）Warning:  Spring Team recommends "Always use constructor based dependency injection in your beans. Always use assertions for mandatory dependencies".
-
-原来代码：
-
-```java
-@Autowired
-private EnterpriseDbService service;
-```
-
-建议改成：
-
-```java
-private final EnterpriseDbService service;
-@Autowired
-public EnterpriseDbController(EnterpriseDbService service) {
-   this.service = service;
-}
-```
-
-
-
-**UserDao.java**定义在dao包内，DAO(Data Access Object) [数据访问对象](https://baike.so.com/doc/7572623-7846717.html)是一个[面向对象](https://baike.so.com/doc/6146835-6360018.html)的数据库接口。相当于可以传递参数到sql语句中，具体实现通过上面所介绍的iBatis来实现。
+**UserMapper.java**定义在mapper包内，DAO(Data Access Object) [数据访问对象](https://baike.so.com/doc/7572623-7846717.html)是一个[面向对象](https://baike.so.com/doc/6146835-6360018.html)的数据库接口。相当于可以传递参数到sql语句中，具体实现通过上面所介绍的iBatis来实现。
 
 需要导入org.apache.ibatis.annotations包
 
 ```java
-//UserDao.java
-package com.icepoint.restful.dao;
+//UserMapper.java
+package com.icepoint.restful.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
 
 import com.icepoint.restful.pojo.User;
 
-@Mapper
-public interface UserDao {
+public interface UserMapper {
 
     @Insert("insert into t_user(id, name, age) values (#{id}, #{name}, #{age})")
     void addUser(User user);
@@ -428,11 +419,10 @@ public interface UserDao {
     @Select("SELECT id,name,age FROM t_user")
      List<User> findAll();
 }
+
 ```
 
 `@Delete`,`@Insert`,`@Select`,`@Update`后面括号里包含mysql语句，表明要执行的操作
-
-`@Mapper`为了让DemoMapper能够让别的类进行引用，我们可以在DemMapper类上添加@Mapper注解：
 
 ```java
 @Mapper  
@@ -440,20 +430,6 @@ public interface DemoMapper {
 	@Insert("insert into Demo(name) values(#{name})")  
 	@Options(keyProperty="id",keyColumn="id",useGeneratedKeys=true)  
 	public void save(Demo demo);  
-}  
-```
-
- 直接在Mapper类上面添加注解@Mapper，这种方式要求每一个mapper类都需要添加此注解，麻烦。
-
-`@MapperScan`优点：可以直接在主程序注解多个包
-
-```java
-@SpringBootApplication  
-@MapperScan({"com.kfit.*.mapper","org.kfit.*.mapper"})  
-public class App {  
-    public static void main(String[] args) {  
-       SpringApplication.run(App.class, args);  
-    }  
 }  
 ```
 
@@ -522,9 +498,13 @@ public class UserRestController {
 //RestfulApplication.java
 package com.icepoint.restful;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan(basePackages = {"com.icepoint.restful.web", "com.icepoint.restful.service"})
+@MapperScan(basePackages = "com.icepoint.restful.mapper")
 @SpringBootApplication
 public class RestfulApplication {
 
@@ -534,11 +514,14 @@ public class RestfulApplication {
 		System.out.println("Running...");
 	}
 }
+
 ```
 
-至此从User类 -> 最终主方法的实现链已经完成。
+扫包注解：
 
-但是还需要一些配置文件以及辅助代码来完成部分功能。
+`@ComponentScan` 是用于扫描其他模块中的接口的@Component @Service @Controller 等
+
+`@MapperScan`是用于扫描模块中的Mapper类
 
 
 
@@ -897,7 +880,29 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 
 （Springboot要比Spring实现少用很多xml文件，方便快捷很多）
 
-（运行报错，还在调试......）
+启动效果：
+
+![u](D:\GitHub\GitHub\SpringbootRestful\pics\run.png)
+
+发送请求：
+
+这里安装postman用于测试发送请求端
+
+发送插入数据的post请求，因为服务端@RequestBody注解，说明请求格式为json
+
+首先修改Headers的ContentType为application/Json
+
+![eade](D:\GitHub\GitHub\SpringbootRestful\pics\header.png)
+
+然后在body，切换到raw，写入requestBody，
+
+![od](D:\GitHub\GitHub\SpringbootRestful\pics\body.png)
+
+Send后返回true，表示成功
+
+![](D:\GitHub\GitHub\SpringbootRestful\pics\ok.png)
+
+
 
 ### References:
 
